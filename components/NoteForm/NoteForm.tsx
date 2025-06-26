@@ -14,6 +14,10 @@ interface NoteFormValues {
   tag: Tag;
 }
 
+interface NoteFormProps {
+  onClose: () => void;
+}
+
 const initialValues: NoteFormValues = {
   title: "",
   content: "",
@@ -31,7 +35,7 @@ const NoteFormSchema = Yup.object().shape({
     .required("Tag is required"),
 });
 
-export default function NoteForm() {
+export default function NoteForm({onClose}: NoteFormProps) {
   const fieldId = useId();
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -39,18 +43,15 @@ export default function NoteForm() {
   const { mutate: addNote, isPending } = useMutation({
     mutationFn: (newNote: NewNote) => createNote(newNote),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
-      router.back();
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+      onClose();
     },
     onError: () => {
-      toast.error("Something went wrong...Try again, please");
+      toast.error('Something went wrong...Try again, please');
     },
   });
 
-  const handleSubmit = (
-    values: NoteFormValues,
-    actions: FormikHelpers<NoteFormValues>
-  ) => {
+  const handleSubmit = (values: NoteFormValues, actions: FormikHelpers<NoteFormValues>) => {
     addNote(
       { ...values },
       {
@@ -95,7 +96,7 @@ export default function NoteForm() {
         </div>
 
         <div className={css.actions}>
-          <button type="button" onClick={() => router.back()} className={css.cancelButton}>
+          <button type="button" onClick={onClose} className={css.cancelButton}>
             Cancel
           </button>
           <button type="submit" className={css.submitButton} disabled={isPending}>

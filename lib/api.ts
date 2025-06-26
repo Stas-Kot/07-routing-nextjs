@@ -10,8 +10,8 @@ axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 const PER_PAGE = 12;
 
 const fetchNotes = async (
-  search: string,
-  page: number,
+  search: string = "1",
+  page: number = 1,
   tag?: Tag
 ): Promise<GetNotesRes> => {
   const response = await axios.get<GetNotesRes>('/notes', {

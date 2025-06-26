@@ -23,13 +23,13 @@ export default function TagsMenu() {
       </button>
       {isOpen && (
         <ul className={css.menuList}>
-          <li className={css.menuItem}>
+          <li className={css.menuItem} onClick={toggle}>
             <Link href={`/notes/filter/All`} className={css.menuLink}>
               All notes
             </Link>
           </li>
-          {TAGS.map((tag, index) => (
-            <li key={index} className={css.menuItem}>
+          {TAGS.map(tag => (
+            <li key={tag} className={css.menuItem} onClick={toggle}>
               <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
                 {tag}
               </Link>
