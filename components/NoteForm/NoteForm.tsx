@@ -6,7 +6,6 @@ import { createNote } from "../../lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { NewNote, Tag } from "../../types/note";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 interface NoteFormValues {
   title: string;
@@ -38,7 +37,6 @@ const NoteFormSchema = Yup.object().shape({
 export default function NoteForm({onClose}: NoteFormProps) {
   const fieldId = useId();
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const { mutate: addNote, isPending } = useMutation({
     mutationFn: (newNote: NewNote) => createNote(newNote),
