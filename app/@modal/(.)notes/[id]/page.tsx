@@ -6,7 +6,7 @@ type Props = {
 };
 
 const NotePreview = async ({ params }: Props) => {
-  const idString = await params.id;
+  const idString = (await params).id;
   const id = Number(idString);
 
   if (!idString || isNaN(id)) {
