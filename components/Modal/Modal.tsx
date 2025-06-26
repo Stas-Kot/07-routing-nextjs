@@ -1,6 +1,5 @@
 'use client';
 
-import { createPortal } from 'react-dom';
 import css from './Modal.module.css';
 import { useRouter } from 'next/navigation';
 // import { useEffect } from "react";
@@ -19,12 +18,11 @@ export default function Modal({ children }: ModalProps) {
 
   const handleClose = () => router.back()
   
-  return createPortal(
+  return (
     <div className={css.backdrop} onClick={handleClose} role="dialog" aria-modal="true">
       <div className={css.modal} onClick={e => e.stopPropagation()}>
         {children}
       </div>
-    </div>,
-    document.body
+    </div>
   );
 }
