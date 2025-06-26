@@ -2,11 +2,11 @@ import Modal from "@/components/Modal/Modal";
 import { fetchNoteById } from "@/lib/api";
 
 type Props = {
-  params: { id?: string };
+  params: Promise<{ id: string }>;
 };
 
 const NotePreview = async ({ params }: Props) => {
-  const idString = params?.id;
+  const idString = await params.id;
   const id = Number(idString);
 
   if (!idString || isNaN(id)) {
