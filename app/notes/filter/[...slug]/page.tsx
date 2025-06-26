@@ -6,13 +6,13 @@ import { fetchNotes, GetNotesRes } from '@/lib/api';
 import { Tag, TAGS} from '@/types/note';
 
 type Props = {
-  params: { slug?: string[] };
+  params: Promise<{ slug: string[] }>;
 };
 
 async function Notes({ params }: Props) {
   const queryClient = new QueryClient();
 
-  const { slug } = await params
+  const { slug } = await params;
   const stringTag = slug?.[0];
   
   function isValidTag(value: string): value is Tag {
