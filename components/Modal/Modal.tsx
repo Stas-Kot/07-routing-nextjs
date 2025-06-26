@@ -19,12 +19,11 @@ export default function Modal({ children }: ModalProps) {
 
   const handleClose = () => router.back()
   
-  return createPortal(
+  return (
     <div className={css.backdrop} onClick={handleClose} role="dialog" aria-modal="true">
       <div className={css.modal} onClick={e => e.stopPropagation()}>
         {children}
       </div>
-    </div>,
-    document.body
+    </div>
   );
 }
