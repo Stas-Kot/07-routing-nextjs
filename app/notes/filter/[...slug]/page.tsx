@@ -40,7 +40,20 @@ async function Notes({ params }: Props) {
   const initialData = queryClient.getQueryData<GetNotesRes>(queryKey);
 
   if (!initialData) {
-    throw new Error('Initial data for notes not found in cache after prefetch.');
+    const contextInfo = JSON.stringify(
+      {
+        queryKey,
+        initialSearch,
+        initialPage,
+        initialTag,
+      },
+      null,
+      2
+    );
+
+    throw new Error(
+      `Initial data for notes not found in cache after prefetch.\nContext:\n${contextInfo}`
+    );
   }
 
   return (
