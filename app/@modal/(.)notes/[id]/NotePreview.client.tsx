@@ -7,7 +7,6 @@ import { fetchNoteById } from '@/lib/api';
 import { useQuery } from '@tanstack/react-query';
 
 const NotePreviewClient = () => {
-  console.log('Modal rendered');
   const params = useParams<{ id: string }>();
   const id = Number(params.id);
   const router = useRouter();
