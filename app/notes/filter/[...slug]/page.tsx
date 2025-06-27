@@ -13,12 +13,18 @@ async function Notes({ params }: Props) {
   const queryClient = new QueryClient();
 
   const { slug } = await params;
-  const stringTag = slug?.[0];
-  
-  function isValidTag(value: string): value is Tag {
-    return TAGS.includes(value as Tag);
+  let currentTag: Tag | undefined = undefined;
+
+  if (Array.isArray(slug) && slug.length > 0) {
+    const stringTag = slug[0];
+    if (TAGS.includes(stringTag as Tag)) {
+      currentTag = stringTag as Tag;
+    } else {
+      console.warn(`Invalid tag provided in slug: ${stringTag}`);
+    }
+  } else {
+    console.info('No slug provided; showing notes without tag filter.');
   }
-  const currentTag: Tag | undefined = stringTag && isValidTag(stringTag) ? stringTag : undefined;
   
 
   const initialTag = currentTag;

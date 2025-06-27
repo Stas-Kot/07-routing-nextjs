@@ -18,8 +18,8 @@ interface NotesClientProps {
   initialTag?: Tag;
 }
 
-const NotesClient = ({ initialData, initialSearch, initialPage, initialTag }: NotesClientProps) => {
-  const [tag] = useState(initialTag);
+const NotesClient = ({ initialData, initialSearch, initialPage, initialTag: tag }: NotesClientProps) => {
+  // const [tag] = useState(initialTag);
   const [search, setSearch] = useState(initialSearch);
   const [page, setPage] = useState(initialPage);
   const [isOpen, setIsOpen] = useState(false);
